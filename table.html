@@ -16,15 +16,22 @@
         <button id="addTask" onclick="handleClick()">add Task</button>
         <ul id="list"></ul>
         <!-- Modal -->
-        <div
-            class="modal fade"
-            id="exampleModal"
-            tabindex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-        >
-            <div class="modal-dialog"></div>
-        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
         <script>
         let getVal;
@@ -34,30 +41,39 @@ function handleClick(){
 
     <div>
         <li>${getVal}</li>
-        <button data-bs-toggle="modal" data-bs-target="#exampleModal" onclick=updateTask(this)>Edit</button>
-        <button>Delete</button>
+        <button data-bs-toggle="modal" data-bs-target="#exampleModal" onclick='updateData(this)'>update</button>
+        <button onclick="deleteBtn(this)">Delete</button>
     </div>
              ` 
             document.getElementById("search").value=''; 
 }
-function updateTask(){
- document.querySelector(".modal-dialog").innerHTML = `
-  <div class="modal-content">
 
-          <div class="modal-body">
-              <input type="text" value=${getVal}>
-              <button>update</button>
-          </div>
 
-          <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
- </div>
- `
+// modal
+function updateData(abc){
+console.log(abc)
+     getChild = abc.parentElement.children[0];
+     console.log(getChild)
+     getInputVal = abc.parentElement.children[0].innerHTML;
+
+    // console.log(getInputVal.innerHTML)
+    document.querySelector(".modal-body").innerHTML = `
+    <div>
+            <input type="text" value=${getInputVal} id="changeInput"> <button onclick=addData(this)>add data</button>
+
+        </div>
+    `}
+   // add data
+function addData(a){
+    console.log(getChild.innerHTML  )
+   let storeVal =  document.getElementById("changeInput").value
+    getChild.innerHTML = storeVal
+
 }
-
-
+// Delete 
+function deleteBtn(deletediv){
+    deletediv.parentElement.remove()
+}
         </script>
     </body>
 </html>
